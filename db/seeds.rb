@@ -5,3 +5,17 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+#
+#
+#
+locations = []
+locations << Location.create(name: 'Amsterdam')
+locations << Location.create(name: 'Rotterdam')
+locations << Location.create(name: 'Milan')
+
+# create all possibilities of pair of departure arrival using locations.
+locations.permutation(2).each do |pair_locations|
+  Trip.create(departure:pair_locations.first, arrival:pair_locations.last, departure_time: DateTime.now + 5.minutes)
+end
+
+
