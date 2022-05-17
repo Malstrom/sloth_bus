@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :passengers, only: [:index]
+
   resources :trips, only: [:index] do
     resources :passengers
     member do
@@ -8,6 +10,11 @@ Rails.application.routes.draw do
 
 
   resources :user do
+    resources :passengers, only: [:show] do
+      member do
+        get :add_extra_luggage
+      end
+    end
     resources :credit_cards
   end
 
