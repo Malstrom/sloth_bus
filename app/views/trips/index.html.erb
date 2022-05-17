@@ -4,6 +4,18 @@
 
 <h2>Current_time: <%= DateTime.now.localtime %></h2>
 
+<%= form_tag trips_path, :method => 'get' do %>
+  <p>
+    <%= select_tag :departure, options_from_collection_for_select(Location.all, :id, :name),
+                   {:class=>'form-control', :prompt => 'Select departure'}  %>
+    <%= select_tag :arrival, options_from_collection_for_select(Location.all, :id, :name),
+                   {:class=>'form-control', :prompt => 'Select arrival'}  %>
+    <%= datetime_field_tag :departure_time %>
+
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
 <table>
   <thead>
   <tr>
