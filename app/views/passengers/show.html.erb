@@ -3,6 +3,16 @@
 <%= render @passenger %>
 
 <div>
+
+  <%= form_tag add_extra_luggage_user_passenger_path(current_user, @passenger), :method => 'get' do %>
+    <p>
+      <%= number_field_tag 'extra_luggage', 1, max: 2, min: 1  %>
+
+      <%= submit_tag "Add luggage", :name => nil %>
+    </p>
+  <% end %>
+  <br>
+
   <%= link_to "Back to Trips", trips_path %>
 
   <%= button_to 'Refund ticket', [@passenger.trip, @passenger], method: :delete %>

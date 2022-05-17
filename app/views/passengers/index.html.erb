@@ -1,14 +1,23 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Passengers</h1>
+<h1>Revenues</h1>
 
 <div id="passengers">
-  <% @passengers.each do |passenger| %>
-    <%= render passenger %>
+  <% @total_revenue_by_departure.to_a.each do |passenger| %>
+
     <p>
-      <%= link_to "Show this passenger", passenger %>
+      <%= passenger.first.name %>
+      <%= passenger.last %> eur
+    </p>
+    <p>
+      <%# link_to "Show this passenger", passenger %>
     </p>
   <% end %>
+
+  <p>
+    Total revenue
+    <%= @total_revenue %>
+  </p>
+
 </div>
 
-<%= link_to "New passenger", new_passenger_path %>
