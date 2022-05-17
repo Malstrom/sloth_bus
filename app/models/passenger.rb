@@ -2,7 +2,7 @@ class Passenger < ApplicationRecord
   belongs_to :user
   belongs_to :trip
 
-  validate :free_seats?, :payment_info?
+  validate :free_seats?, :payment_info?, :max_extra_luggage?
   before_destroy :enough_time_to_refund?
 
   def free_seats?
@@ -21,6 +21,12 @@ class Passenger < ApplicationRecord
     if DateTime.now > self.trip.departure_time - 30.minutes
       errors.add(:refund_time_expired, "Refund allow before 30 minutes from departure time")
       throw :abort
+    end
+  end
+
+  def max_extra_luggage?
+    if self.extra_luggage > 6
+      errors.add(:refund_time_expired, "The bus is full of luggage")
     end
   end
 end
