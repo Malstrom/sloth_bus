@@ -1,6 +1,8 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: %i[ show book ]
 
+  before_action :authenticate_user!, :except => [:index]
+
   # GET /trips or /trips.json
   def index
     @trips = Trip.where(nil)
@@ -13,6 +15,17 @@ class TripsController < ApplicationController
 
   # GET /trips/1 or /trips/1.json
   def show
+  end
+
+  def book
+    passenger = @trip.passengers.build(user_id: current_user.id)
+
+    if passenger.save
+      redirect_to(trip_passenger_url(@trip, passenger), notice: "Ticket was successfully bought.")
+    else
+      session[:trip_id] = @trip.id
+      redirect_to new_user_credit_card_url(current_user), notice: passenger.errors.messages.values
+    end
   end
 
   private

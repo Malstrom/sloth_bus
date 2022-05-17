@@ -1,0 +1,30 @@
+<div id="<%= dom_id passenger %>">
+
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <strong>Passenger id:</strong>
+    <%= @passenger.id %>
+  </p>
+
+  <p>
+    <strong>email:</strong>
+    <%= @passenger.user.email %>
+  </p>
+
+  <p>
+    <strong>Departure:</strong>
+    <%= @passenger.trip.departure.name.capitalize %>
+  </p>
+
+  <p>
+    <strong>Arrival:</strong>
+    <%= @passenger.trip.arrival.name.capitalize %>
+  </p>
+
+  <p>
+    <strong>Departure time:</strong>
+    <%= @passenger.trip.departure_time %>
+  </p>
+
+</div>

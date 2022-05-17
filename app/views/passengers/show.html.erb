@@ -1,0 +1,9 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @passenger %>
+
+<div>
+  <%= link_to "Back to Trips", trips_path %>
+
+  <%= button_to 'Refund ticket', [@passenger.trip, @passenger], method: :delete %>
+</div>

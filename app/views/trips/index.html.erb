@@ -32,6 +32,7 @@
       <td><%= trip.departure.name %></td>
       <td><%= trip.arrival.name %></td>
       <td><%= trip.departure_time.localtime %></td>
+      <td><%= link_to 'Book', book_trip_path(trip) %></td>
     </tr>
   <% end %>
   </tbody>
