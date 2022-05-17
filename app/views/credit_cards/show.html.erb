@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @credit_card %>
+
+<div>
+  <%= link_to "Edit this credit card", edit_user_credit_card_path(current_user, @credit_card) %> |
+  <%= link_to "Back to credit cards", user_credit_cards_path(current_user) %>
+
+  <% if session[:trip_id] %>
+    <%= link_to_if session[:trip_id], 'Book your trip', book_trip_path(session[:trip_id]) %>
+  <% end %>
+
+  <%= button_to 'Destroy credit card', [current_user, @credit_card], method: :delete %>
+</div>
