@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_17_151024) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_17_152425) do
   create_table "credit_cards", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "cardholder"
@@ -33,6 +33,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_17_151024) do
     t.bigint "trip_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "price", precision: 5, scale: 2
+    t.integer "extra_luggage", default: 0
     t.index ["trip_id"], name: "index_passengers_on_trip_id"
     t.index ["user_id"], name: "index_passengers_on_user_id"
   end
@@ -44,6 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_17_151024) do
     t.integer "seats", default: 20
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "base_price", precision: 5, scale: 2, default: "20.0", null: false
     t.index ["arrival_id"], name: "index_trips_on_arrival_id"
     t.index ["departure_id"], name: "index_trips_on_departure_id"
   end
