@@ -5,8 +5,7 @@ class TripsController < ApplicationController
 
   # GET /trips or /trips.json
   def index
-    @trips = Trip.where(nil)
-
+    @trips = Trip.not_departed
     # models/concerns/filterable.rb
     filtering_params(params).each do |key, value|
       @trips = @trips.public_send("filter_by_#{key}", value) if value.present?
@@ -18,10 +17,12 @@ class TripsController < ApplicationController
   end
 
   def book
+    session[:trip_id] = nil if session[:trip_id]
+
     passenger = @trip.passengers.build(user_id: current_user.id)
 
     if passenger.save
-      redirect_to(trip_passenger_url(@trip, passenger), notice: "Ticket was successfully bought.")
+      redirect_to(trip_passenger_url(@trip,passenger), notice: "Ticket was successfully bought.")
     else
       session[:trip_id] = @trip.id
       redirect_to new_user_credit_card_url(current_user), notice: passenger.errors.messages.values
